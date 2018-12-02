@@ -5,6 +5,7 @@ mono: none
 script:
   - dotnet tool install --global GitVersion.Tool --version 4.0.1-beta1-50
   - export PATH="${PATH}:/root/.dotnet/tools"
+  - dotnet gitversion
   - dotnet restore
   - dotnet pack
   - dotnet nuget push ./bin/Debug/*.nupkg -k $NugetApiKey -s nuget.org
