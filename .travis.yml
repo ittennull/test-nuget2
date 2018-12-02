@@ -2,8 +2,8 @@ language: csharp
 dotnet: 2.1.500
 mono: none
 
-before_install:
-  - git fetch --unshallow # Travis always does a shallow clone, but GitVersion needs the full history including branches and tags
+git:
+  depth: false
 
 install:
   - dotnet tool install --global GitVersion.Tool --version 4.0.1-beta1-50
