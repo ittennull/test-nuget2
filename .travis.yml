@@ -2,12 +2,13 @@ language: csharp
 dotnet: 2.1.500
 mono: none
 
-before_install:
-  - sudo apt-get install -y tree
+install:
+  - dotnet tool install --global GitVersion.Tool --version 4.0.1-beta1-50
+
+before_script:
+  - export PATH="${PATH}:$HOME/.dotnet/tools"
 
 script:
-  - dotnet tool install --global GitVersion.Tool --version 4.0.1-beta1-50
-  - export PATH="${PATH}:$HOME/.dotnet/tools"
   - dotnet gitversion /ensureassemblyinfo /updateassemblyinfo "AssemblyInfo_FromGitVersion.cs"
   - find ./ -name "*.csproj" | xargs dirname | xargs -L 1 cp "AssemblyInfo_FromGitVersion.cs"
   - noVersionsArgs='/p:GenerateAssemblyVersionAttribute=false /p:GenerateAssemblyFileVersionAttribute=false /p:GenerateAssemblyInformationalVersionAttribute=false'
