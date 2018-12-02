@@ -17,6 +17,6 @@ script:
   - dotnet gitversion /ensureassemblyinfo /updateassemblyinfo $assemblyInfoFileName
   - appVersion=`dotnet gitversion /showvariable FullSemVer`
   - find ./ -name "*.csproj" | xargs dirname | xargs -L 1 cp $assemblyInfoFileName
-  - find test/ -name "*.csproj" -exec dotnet test {} $noVersionsArgs \;
+  - [ -d test ] && find test/ -name "*.csproj" -exec dotnet test {} $noVersionsArgs \;
   - dotnet pack ./test-nuget/test-nuget.csproj $noVersionsArgs /p:Version="$appVersion"
   - dotnet nuget push ./test-nuget/bin/Debug/*.nupkg -k $NugetApiKey -s nuget.org
