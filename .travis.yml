@@ -2,6 +2,9 @@ language: csharp
 dotnet: 2.1.500
 mono: none
 
+before_install:
+  - sudo apt-get install -y tree
+
 script:
   - dotnet tool install --global GitVersion.Tool --version 4.0.1-beta1-50
   - export PATH="${PATH}:/root/.dotnet/tools"
