@@ -12,5 +12,5 @@ script:
   - find ./ -name "*.csproj" | xargs dirname | xargs -L 1 cp "AssemblyInfo_FromGitVersion.cs"
   - noVersionsArgs='/p:GenerateAssemblyVersionAttribute=false /p:GenerateAssemblyFileVersionAttribute=false /p:GenerateAssemblyInformationalVersionAttribute=false'
   - find test/ -name "*.csproj" -exec dotnet test {} $noVersionsArgs \;
-  - dotnet pack $noVersionsArgs
-  - dotnet nuget push ./bin/Debug/*.nupkg -k $NugetApiKey -s nuget.org
+  - dotnet pack ./test-nuget/test-nuget.csproj
+  - dotnet nuget push ./test-nuget/bin/Debug/*.nupkg -k $NugetApiKey -s nuget.org
