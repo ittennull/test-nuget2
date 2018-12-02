@@ -8,8 +8,8 @@ before_install:
 script:
   - dotnet tool install --global GitVersion.Tool --version 4.0.1-beta1-50
   - export PATH="${PATH}:$HOME/.dotnet/tools"
-  - tree "$HOME/.dotnet"
-  - dotnet gitversion
-  - dotnet restore
-  - dotnet pack
+  - dotnet gitversion /ensureassemblyinfo /updateassemblyinfo "AssemblyInfo_FromGitVersion.cs"
+  - find ./ -name "*.csproj" | xargs dirname | xargs -L 1 cp "AssemblyInfo_FromGitVersion.cs"
+  - find test/ -name "*.csproj" -exec dotnet test {} /p:GenerateAssemblyVersionAttribute=false /p:GenerateAssemblyFileVersionAttribute=false /p:GenerateAssemblyInformationalVersionAttribute=false \;
+  - dotnet pack /p:GenerateAssemblyVersionAttribute=false /p:GenerateAssemblyFileVersionAttribute=false /p:GenerateAssemblyInformationalVersionAttribute=false
   - dotnet nuget push ./bin/Debug/*.nupkg -k $NugetApiKey -s nuget.org
