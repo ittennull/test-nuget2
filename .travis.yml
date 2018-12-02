@@ -8,4 +8,4 @@ env:
 script:
   - dotnet restore
   - dotnet pack
-  - dotnet push .\bin\Debug\test-nuget.1.0.0.nupkg -k $NugetApiKey -s nuget.org
+  - dotnet nuget push .\bin\Debug\test-nuget.1.0.0.nupkg -k $NugetApiKey -s nuget.org
