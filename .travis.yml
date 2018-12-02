@@ -8,8 +8,7 @@ before_install:
 script:
   - dotnet tool install --global GitVersion.Tool --version 4.0.1-beta1-50
   - export PATH="${PATH}:/root/.dotnet/tools"
-  - tree $HOME
-  - tree /root
+  - tree /root/.dotnet
   - dotnet gitversion
   - dotnet restore
   - dotnet pack
